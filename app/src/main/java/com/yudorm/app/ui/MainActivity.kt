@@ -1,4 +1,4 @@
-package com.yudorm.app.ui.main
+package com.yudorm.app.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
