@@ -21,9 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.yudorm.app.ui.viewmodel.LoginViewModel
 import com.yudorm.app.R
-
-val AppBlue = Color(0xFF2F76BD)
-val AppOrange = Color(0xFFF59E48)
+import com.yudorm.app.ui.theme.*
 
 
 @Composable
@@ -31,8 +29,8 @@ fun LoginScreen(
     viewModel: LoginViewModel = viewModel(),
     onLoginSuccess: (String?) -> Unit,
     onPasswordResetButton: () -> Unit,
-    onAuthorityLoginButton: () -> Unit) {
-
+    onAuthorityLoginButton: () -> Unit,
+    onRegisterButton: () -> Unit) {
 
     Column(
         modifier = Modifier
@@ -50,7 +48,7 @@ fun LoginScreen(
         )
 
 
-        Spacer(modifier = Modifier.height(48.dp)) // Boşluk
+        Spacer(modifier = Modifier.height(48.dp))
 
 
         Text(
@@ -107,7 +105,19 @@ fun LoginScreen(
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier
                 .align(Alignment.End)
-                .clickable { onPasswordResetButton }
+                .clickable { onPasswordResetButton() }
+                .padding(vertical = 8.dp)
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Text(
+            text = "Kayıtlı değil misiniz? Kayıt ol",
+            color = AppBlue,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier
+                .align(Alignment.End)
+                .clickable { onRegisterButton() }
                 .padding(vertical = 8.dp)
         )
 
@@ -128,6 +138,21 @@ fun LoginScreen(
             shape = RoundedCornerShape(24.dp)
         ) {
             Text(text = "Giriş Yap", fontSize = 18.sp)
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(
+            onClick = {
+                onRegisterButton()
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(50.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = AppGreen),
+            shape = RoundedCornerShape(24.dp)
+        ) {
+            Text(text = "Kayıt Ol", fontSize = 18.sp)
         }
 
         Spacer(modifier = Modifier.height(16.dp))

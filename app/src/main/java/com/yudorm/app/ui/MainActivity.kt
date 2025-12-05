@@ -10,6 +10,7 @@ import com.yudorm.app.ui.theme.YUDormTheme
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.yudorm.app.ui.screens.HomeScreen
+import com.yudorm.app.ui.screens.RegisterScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,15 +26,23 @@ class MainActivity : ComponentActivity() {
 
                     composable("login"){
                         LoginScreen(
-                            onLoginSuccess =  { studentNo -> navController.navigate("home/$studentNo") },
+                            onLoginSuccess =  { studentNo -> navController.navigate("home") },
                             onPasswordResetButton = { navController.navigate("login")},
-                            onAuthorityLoginButton = {navController.navigate("login")                 },
+                            onAuthorityLoginButton = {navController.navigate("login")},
+                            onRegisterButton = {navController.navigate("register")}
                             )
                     }
 
-                    composable("home/{studentNo}") { backStackEntry ->
-                        val studentNoRetrieved = backStackEntry.arguments?.getString("studentNo")
-                        HomeScreen(studentNo =  studentNoRetrieved ?: "")
+                    composable("home") { backStackEntry ->
+                        HomeScreen()
+                    }
+
+                    composable("register") {
+                        RegisterScreen(
+                            onRegisterSuccess = { navController.navigate("login")},
+                            onLoginScreen = {navController.navigate("login")},
+                            onAuthorityLoginButton = { navController.navigate("login")}
+                        )
                     }
 
                 }
