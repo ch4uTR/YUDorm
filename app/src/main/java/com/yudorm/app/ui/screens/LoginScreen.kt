@@ -103,7 +103,7 @@ fun LoginScreen(
 
 
         Text(
-            text = "Şifrenizi mi unuttunuz?",
+            text = " Şifrenizi mi unuttunuz?",
             fontSize = 18.sp,
             color = AppBlue,
             fontWeight = FontWeight.SemiBold,
@@ -116,7 +116,7 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
-            text = "Kayıtlı değil misiniz? Kayıt ol",
+            text = " Kayıtlı değil misiniz? Kayıt ol",
             fontSize = 18.sp,
             color = AppBlue,
             fontWeight = FontWeight.SemiBold,
