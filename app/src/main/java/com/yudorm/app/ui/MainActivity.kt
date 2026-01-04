@@ -16,6 +16,7 @@ import com.yudorm.app.ui.theme.YUDormTheme
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.yudorm.app.ui.screens.ActionsScreen
 import com.yudorm.app.ui.screens.HomeScreen
 import com.yudorm.app.ui.screens.IssueScreen
 import com.yudorm.app.ui.screens.RegisterScreen
@@ -36,12 +37,12 @@ class MainActivity : ComponentActivity() {
 
                 val showBottomBar = currentRoute != "login" && currentRoute != "register"
 
-                Scaffold( bottomBar = { if(showBottomBar) { BottomNavigationBar(navController) } } ) { innerPadding ->
+                Scaffold( bottomBar = {
+                        if(showBottomBar) {
+                            val currentStudentNo = navBackStackEntry?.arguments?.getString("studentNo") ?: ""
+                            BottomNavigationBar(navController, currentStudentNo) } } ) { innerPadding ->
                     NavHost(navController = navController, startDestination = "login", modifier = Modifier.padding(innerPadding)){
-                        composable("login"){ backStackEntry ->
-
-                            val studentNoPath = backStackEntry.arguments?.getString("studentNo") ?: ""
-
+                        composable("login"){
                             LoginScreen(
                                 viewModel = loginViewModel,
                                 onLoginSuccess =  { loggedInNo -> navController.navigate("home/$loggedInNo"){ popUpTo("login") {inclusive = true} } },
@@ -74,6 +75,17 @@ class MainActivity : ComponentActivity() {
                                 studentNo = studentNoPath,
                                 onSubmissionSuccess = {navController.navigate("home/$studentNoPath")}
                             )
+                        }
+
+                        composable(route = "actions/{studentNo}"){ backStackEntry ->
+                            val studentNoPath = backStackEntry.arguments?.getString("studentNo") ?: ""
+
+                            ActionsScreen(
+                                studentNo = studentNoPath,
+                                navController = navController
+                            )
+
+
                         }
 
                     }
