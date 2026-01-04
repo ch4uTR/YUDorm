@@ -68,15 +68,16 @@ fun IssueScreen(
                 fontSize = 24.sp
 
             )
-            Text(
-                text = "Lütfen oluşturmak istediğiniz arıza kaydını seçiniz",
-                textAlign = TextAlign.Center,
-                color = Color.Gray
-            )
-
-            Spacer(modifier = Modifier.height(36.dp))
 3
             if (!isSuccess){
+
+                Text(
+                    text = "Lütfen oluşturmak istediğiniz arıza kaydını seçiniz",
+                    textAlign = TextAlign.Center,
+                    color = Color.Gray
+                )
+
+                Spacer(modifier = Modifier.height(36.dp))
 
                 val categories = listOf(
                     "Buzdolabı",
