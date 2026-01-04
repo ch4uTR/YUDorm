@@ -39,7 +39,7 @@ fun BottomNavigationBar(
         )
 
         NavigationBarItem(
-            selected = currentRoute?.startsWith("actions") == true,
+            selected = currentRoute?.startsWith("actions") == true || currentRoute?.startsWith("issue-management") == true,
             onClick = { navController.navigate("actions/$studentNo") },
             label = { Text("İşlemler") },
             icon = { Icon(painterResource(R.drawable.user_icon), null) }
