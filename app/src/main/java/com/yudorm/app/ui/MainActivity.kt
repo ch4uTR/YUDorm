@@ -18,6 +18,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.yudorm.app.ui.screens.ActionsScreen
 import com.yudorm.app.ui.screens.HomeScreen
+import com.yudorm.app.ui.screens.IssueManagementScreen
 import com.yudorm.app.ui.screens.IssueScreen
 import com.yudorm.app.ui.screens.RegisterScreen
 import com.yudorm.app.ui.viewmodel.LoginViewModel
@@ -77,13 +78,25 @@ class MainActivity : ComponentActivity() {
                             )
                         }
 
-                        composable(route = "actions/{studentNo}"){ backStackEntry ->
-                            val studentNoPath = backStackEntry.arguments?.getString("studentNo") ?: ""
+                        composable(route = "actions/{studentNo}") { backStackEntry ->
+                            val studentNoPath =
+                                backStackEntry.arguments?.getString("studentNo") ?: ""
 
                             ActionsScreen(
                                 studentNo = studentNoPath,
                                 navController = navController
                             )
+                        }
+
+                        composable(route = "issue-management/{studentNo}") { backStackEntry ->
+                            val studentNoPath = backStackEntry.arguments?.getString("studentNo") ?: ""
+
+                            IssueManagementScreen(
+                                studentNo = studentNoPath,
+                                navController = navController
+                            )
+
+                        }
 
 
                         }
@@ -100,5 +113,5 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
+
 

@@ -27,6 +27,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
 import com.yudorm.app.R
 import com.yudorm.app.ui.theme.Typography
@@ -49,7 +50,7 @@ fun ActionsScreen(
         ImageActionButton(
             title = "Arıza Kaydı",
             imgRes = R.drawable.ariza_kaydi,
-            onClick = { navController.navigate("submit-issue/$studentNo")}
+            onClick = { navController.navigate("issue-management/$studentNo")}
         )
 
         ImageActionButton(
@@ -86,13 +87,14 @@ fun ActionsScreen(
 fun ImageActionButton(
     title: String,
     imgRes: Int,
+    height: Int = 118,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ){
     Card(
         modifier = modifier
             .width(363.dp)
-            .height(118.dp)
+            .height(height.dp)
             .padding(vertical = 10.dp)
             .clickable{ onClick()  },
             shape = RoundedCornerShape(23.dp),
@@ -111,6 +113,7 @@ fun ImageActionButton(
             Text(
                 text = title,
                 fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier
                     .align(Alignment.CenterStart)
                     .padding(start = 24.dp)
@@ -120,5 +123,47 @@ fun ImageActionButton(
     }
 
 
+
+}
+
+
+@Composable
+fun IssueManagementScreen(
+    studentNo: String,
+    navController: NavController
+){
+
+    Column(
+        modifier =  Modifier
+            .fillMaxSize()
+            .padding(horizontal = 32.dp, vertical = 90.dp),
+        verticalArrangement = Arrangement.spacedBy(24.dp)
+    ){
+        Text(
+            text = "Arıza Kayıtları",
+            style = MaterialTheme.typography.headlineMedium,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        )
+        Text(
+            text = "Arıza kayıtlarını kontrol etmek ve yeni bir arıza kaydı oluşturmak için lütfen devam edin.",
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+
+        ImageActionButton(
+            title = "Yeni Kayıt Oluştur",
+            imgRes = R.drawable.kayit_olustur,
+            onClick = { navController.navigate("submit-issue/$studentNo") },
+            height = 187
+        )
+
+        ImageActionButton(
+            title = "Arıza Kayıtlarım",
+            imgRes = R.drawable.kayitlarim,
+            onClick = { },
+            height = 187
+        )
+    }
 
 }
