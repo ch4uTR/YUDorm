@@ -6,19 +6,20 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.compose.rememberNavController
-import com.yudorm.app.ui.screens.LoginScreen
-import com.yudorm.app.ui.theme.YUDormTheme
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.yudorm.app.ui.screens.HomeScreen
 import com.yudorm.app.ui.screens.IssueScreen
+import com.yudorm.app.ui.screens.LoginScreen
+import com.yudorm.app.ui.screens.ProfileScreen
 import com.yudorm.app.ui.screens.RegisterScreen
+import com.yudorm.app.ui.theme.YUDormTheme
 import com.yudorm.app.ui.viewmodel.LoginViewModel
 
 class MainActivity : ComponentActivity() {
@@ -74,6 +75,16 @@ class MainActivity : ComponentActivity() {
                                 studentNo = studentNoPath,
                                 onSubmissionSuccess = {navController.navigate("home/$studentNoPath")}
                             )
+                        }
+
+                        composable("profile/{studentNo}") { backStackEntry ->
+                        val studentNo = backStackEntry.arguments?.getString("studentNo") ?: "Bilinmiyor"
+                        ProfileScreen(studentNo = studentNo)
+                    }
+
+                         composable("settings/{studentNo}") { backStackEntry ->
+                            val studentNo = backStackEntry.arguments?.getString("studentNo") ?: ""
+                            Text("Ayarlar Ekranı - Yakında")
                         }
 
                     }
