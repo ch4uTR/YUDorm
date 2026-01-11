@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "481610447572",
+    "project_id": "yudorm1",
+    "storage_bucket": "yudorm1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:481610447572:android:5a95e3b57a5681ee21d941",
+        "android_client_info": {
+          "package_name": "com.yudorm.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCy--BN9PItz_AvcgDnCn_pugfgpVzhDAM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
