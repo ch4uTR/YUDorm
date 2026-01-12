@@ -1,52 +1,6 @@
-package com.yudorm.app.ui
 
-/*
-@Composable
-fun BottomNavigationBar(navController: NavController){
-
-    NavigationBar(
-        containerColor = Color.White
-    ) {
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentRoute = navBackStackEntry?.destination?.route
-        val currentStudentNo = navBackStackEntry?.arguments?.getString("studentNo")
-
-        NavigationBarItem(
-            selected = currentRoute?.startsWith("home") == true,
-            onClick = {
-                if (currentRoute?.startsWith("home") == false) {
-                    currentStudentNo?.let { no ->
-                        navController.navigate("home/$no") {
-                            popUpTo(navController.graph.startDestinationId)
-                            launchSingleTop = true} }
-
-                }
-            },
-            label = { Text("Ana Sayfa") },
-            icon = { Icon(painterResource(R.drawable.home_idon), null) }
-        )
-
-        NavigationBarItem(
-            selected = currentRoute?.startsWith("profile") == true,
-            onClick = { navController.navigate("home") },
-            label = { Text("Profil") },
-            icon = { Icon(painterResource(R.drawable.user_icon), null) }
-        )
-
-        NavigationBarItem(
-            selected = currentRoute?.startsWith("settings") == true,
-            onClick = { navController.navigate("home") },
-            label = { Text("Ayarlar") },
-            icon = { Icon(painterResource(R.drawable.settings_icon), null) }
-        )
-
-
-    }
-
-}
-*/
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.Apps
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
@@ -60,10 +14,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 
+
 @Composable
 fun BottomNavigationBar(navController: NavController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
+    // Navigasyondan gelen öğrenci numarasını çekiyoruz
     val studentNo = navBackStackEntry?.arguments?.getString("studentNo") ?: ""
 
     NavigationBar(containerColor = Color.White) {
@@ -75,12 +31,19 @@ fun BottomNavigationBar(navController: NavController) {
             icon = { Icon(Icons.Default.Home, contentDescription = "Home") }
         )
 
-        // İşlemler (Arkadaşının "submit-issue" rotası)
+        // İŞLEMLER (Artık direkt forma DEĞİL, menüye gidiyor)
         NavigationBarItem(
-            selected = currentRoute?.startsWith("submit-issue") == true,
-            onClick = { if (studentNo.isNotEmpty()) navController.navigate("submit-issue/$studentNo") },
+            selected = currentRoute?.startsWith("actions-menu") == true,
+            onClick = {
+                if (studentNo.isNotEmpty()) {
+                    navController.navigate("actions-menu/$studentNo") {
+                        popUpTo(navController.graph.startDestinationId)
+                        launchSingleTop = true
+                    }
+                }
+            },
             label = { Text("İşlemler") },
-            icon = { Icon(Icons.Default.Build, contentDescription = "Issues") }
+            icon = { Icon(Icons.Default.Apps, contentDescription = "Menu") }
         )
 
         // Profil
