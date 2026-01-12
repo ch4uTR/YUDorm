@@ -42,15 +42,14 @@ import com.yudorm.app.R
 
 @Composable
 fun ProfileScreen(studentNo: String, onBack: () -> Unit = {}) {
-    // Görseldeki canlı mavi tonu: 0xFF2196F3
     val mainBlue = Color(0xFF2196F3)
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White) // Arka planın beyaz olduğundan emin oluyoruz
+            .background(Color.White) 
     ) {
-        // Üst Araç Çubuğu (Geri butonu ve Mesaj ikonu)
+     
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -88,15 +87,14 @@ fun ProfileScreen(studentNo: String, onBack: () -> Unit = {}) {
                     .padding(24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                // Köpekli Profil Resmi
+                
                 Surface(
                     modifier = Modifier.size(160.dp),
                     shape = CircleShape,
                     border = BorderStroke(3.dp, Color.White),
                     color = Color.LightGray
                 ) {
-                    // Not: R.drawable.profile_dog isminde bir görselin olduğunu varsayıyorum
-                    // Yoksa painterResource(R.drawable.user_icon) gibi olanı kullan
+                   
                     Image(
                         painter = painterResource(id = R.drawable.huun_huur),
                         contentDescription = "Profil Resmi",
@@ -115,40 +113,59 @@ fun ProfileScreen(studentNo: String, onBack: () -> Unit = {}) {
 
                 Spacer(modifier = Modifier.height(32.dp))
 
-                // Bilgi Satırları (ProfilDetailRow fonksiyonu aşağıda)
                 ProfileDetailRow("Okul No:", studentNo)
                 ProfileDetailRow("Departman:", "Görsel İletişim Tasarımı")
                 ProfileDetailRow("Oda Numarası:", "C1009")
 
                 Spacer(modifier = Modifier.weight(1f))
 
-                // Alt Butonlar (Görseldeki gibi yan yana)
+            
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 8.dp), 
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalAlignment = Alignment.CenterVertically 
                 ) {
                     Button(
-                        onClick = { /* Parola güncelleme */ },
+                        onClick = {  },
                         modifier = Modifier
-                            .weight(1.2f)
-                            .height(50.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = Color.White.copy(alpha = 0.2f)),
-                        shape = RoundedCornerShape(16.dp),
-                        elevation = ButtonDefaults.buttonElevation(defaultElevation = 2.dp)
+                            .weight(1f) 
+                            .height(56.dp), 
+                        colors = ButtonDefaults.buttonColors(
+                           
+                            containerColor = Color(0xFF1976D2) 
+                        ),
+                        shape = RoundedCornerShape(20.dp), 
+                        elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp)
                     ) {
-                        Text("Parolayı Güncelle", fontSize = 13.sp, color = Color.White)
+                        Text(
+                            "Parolayı Güncelle",
+                            fontSize = 14.sp,
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold,
+                            maxLines = 1 /
+                        )
                     }
 
                     Button(
-                        onClick = { /* Çıkış yap */ },
+                        onClick = {  },
                         modifier = Modifier
                             .weight(1f)
-                            .height(50.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFD32F2F)), // Kırmızı
-                        shape = RoundedCornerShape(16.dp),
-                        elevation = ButtonDefaults.buttonElevation(defaultElevation = 2.dp)
+                            .height(56.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color(0xFFD32F2F) 
+                        ),
+                        shape = RoundedCornerShape(20.dp),
+                        elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp)
                     ) {
-                        Text("Çıkış Yap", fontSize = 14.sp, color = Color.White, fontWeight = FontWeight.Bold)
+                        Text(
+                            "Çıkış Yap",
+                            fontSize = 14.sp,
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold,
+                            maxLines = 1
+                        )
                     }
                 }
             }
@@ -176,7 +193,7 @@ fun ProfileDetailRow(label: String, value: String) {
                 fontSize = 15.sp
             )
         }
-        // Alt çizgi (Divider)
+        
         HorizontalDivider(
             modifier = Modifier.padding(top = 8.dp),
             thickness = 1.dp,
