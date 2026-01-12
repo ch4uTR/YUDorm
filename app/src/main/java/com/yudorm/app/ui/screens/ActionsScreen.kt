@@ -1,87 +1,70 @@
 package com.yudorm.app.ui.screens
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.yudorm.app.R
-import com.yudorm.app.ui.theme.Typography
-
 
 @Composable
-fun ActionsScreen(
-    studentNo: String,
-    navController: NavController
-){
-
+fun ActionsScreen(navController: NavController, studentNo: String) {
     Column(
-        modifier =  Modifier
+        modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 32.dp, vertical = 90.dp),
-        verticalArrangement = Arrangement.spacedBy(24.dp)
-    ){
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Text(
+            text = "İşlemler", 
+            fontSize = 24.sp, 
+            fontWeight = FontWeight.Bold, 
+            modifier = Modifier.padding(bottom = 8.dp, top = 16.dp)
+        )
 
-
+        // Arıza Kaydı Kartı
         ImageActionButton(
             title = "Arıza Kaydı",
             imgRes = R.drawable.ariza_kaydi,
-            onClick = { navController.navigate("issue-management/$studentNo")}
+            onClick = { navController.navigate("issue-management/$studentNo") }
         )
 
+        // Çamaşırhane Kartı
         ImageActionButton(
             title = "Çamaşırhane",
             imgRes = R.drawable.camasirhane,
-            onClick = { }
+            onClick = { /* navController.navigate("laundry-mgmt/$studentNo") */ }
         )
 
+        // Kayıp Eşya Kartı
         ImageActionButton(
             title = "Kayıp Eşya",
             imgRes = R.drawable.kayip_esya,
-            onClick = { }
+            onClick = { /* navController.navigate("lost-mgmt/$studentNo") */ }
         )
 
+        // Diğer Kartı
         ImageActionButton(
             title = "Diğer",
             imgRes = R.drawable.diger,
-            onClick = { }
+            onClick = { /* Diğer işlemler */ }
         )
-
-
     }
-
 }
-
-
-
-
-
-
-
 
 @Composable
 fun ImageActionButton(
@@ -90,19 +73,16 @@ fun ImageActionButton(
     height: Int = 118,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
-){
+) {
     Card(
         modifier = modifier
-            .width(363.dp)
+            .fillMaxWidth()
             .height(height.dp)
-            .padding(vertical = 10.dp)
-            .clickable{ onClick()  },
-            shape = RoundedCornerShape(23.dp),
-            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-
+            .clickable { onClick() },
+        shape = RoundedCornerShape(20.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
-
-        Box(){
+        Box(modifier = Modifier.fillMaxSize()) {
             Image(
                 painter = painterResource(id = imgRes),
                 contentDescription = title,
@@ -110,41 +90,38 @@ fun ImageActionButton(
                 contentScale = ContentScale.Crop
             )
 
+            // Metnin okunabilirliği için metni hizalıyoruz
             Text(
                 text = title,
-                fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black, // Görsellerin koyuluğuna göre White da yapabilirsin
                 modifier = Modifier
                     .align(Alignment.CenterStart)
                     .padding(start = 24.dp)
             )
         }
-
     }
-
-
-
 }
-
 
 @Composable
 fun IssueManagementScreen(
     studentNo: String,
     navController: NavController
-){
-
+) {
     Column(
-        modifier =  Modifier
+        modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 32.dp, vertical = 90.dp),
-        verticalArrangement = Arrangement.spacedBy(24.dp)
-    ){
+            .padding(horizontal = 24.dp, vertical = 32.dp),
+        verticalArrangement = Arrangement.spacedBy(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Text(
             text = "Arıza Kayıtları",
             style = MaterialTheme.typography.headlineMedium,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
+            fontWeight = FontWeight.Bold
         )
+        
         Text(
             text = "Arıza kayıtlarını kontrol etmek ve yeni bir arıza kaydı oluşturmak için lütfen devam edin.",
             textAlign = TextAlign.Center,
@@ -155,15 +132,14 @@ fun IssueManagementScreen(
             title = "Yeni Kayıt Oluştur",
             imgRes = R.drawable.kayit_olustur,
             onClick = { navController.navigate("submit-issue/$studentNo") },
-            height = 187
+            height = 180
         )
 
         ImageActionButton(
             title = "Arıza Kayıtlarım",
             imgRes = R.drawable.kayitlarim,
-            onClick = { },
-            height = 187
+            onClick = { /* Kayıtlarım listesine git */ },
+            height = 180
         )
     }
-
 }
