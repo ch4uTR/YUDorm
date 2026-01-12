@@ -2,7 +2,9 @@ package com.yudorm.app.ui
 
 /*
 @Composable
-fun BottomNavigationBar(navController: NavController){
+fun BottomNavigationBar(
+    navController: NavController,
+    studentNo: String){
 
     NavigationBar(
         containerColor = Color.White
@@ -15,11 +17,8 @@ fun BottomNavigationBar(navController: NavController){
             selected = currentRoute?.startsWith("home") == true,
             onClick = {
                 if (currentRoute?.startsWith("home") == false) {
-                    currentStudentNo?.let { no ->
-                        navController.navigate("home/$no") {
-                            popUpTo(navController.graph.startDestinationId)
-                            launchSingleTop = true} }
-
+                   navController.navigate("home/$studentNo") }
+                else {
                 }
             },
             label = { Text("Ana Sayfa") },
@@ -27,15 +26,22 @@ fun BottomNavigationBar(navController: NavController){
         )
 
         NavigationBarItem(
+            selected = currentRoute?.startsWith("actions") == true || currentRoute?.startsWith("issue-management") == true,
+            onClick = { navController.navigate("actions/$studentNo") },
+            label = { Text("İşlemler") },
+            icon = { Icon(painterResource(R.drawable.user_icon), null) }
+        )
+
+        NavigationBarItem(
             selected = currentRoute?.startsWith("profile") == true,
-            onClick = { navController.navigate("home") },
+            onClick = { navController.navigate("home/$studentNo") },
             label = { Text("Profil") },
             icon = { Icon(painterResource(R.drawable.user_icon), null) }
         )
 
         NavigationBarItem(
             selected = currentRoute?.startsWith("settings") == true,
-            onClick = { navController.navigate("home") },
+            onClick = { navController.navigate("home/$studentNo") },
             label = { Text("Ayarlar") },
             icon = { Icon(painterResource(R.drawable.settings_icon), null) }
         )
