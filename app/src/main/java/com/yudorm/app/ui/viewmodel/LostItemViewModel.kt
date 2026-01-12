@@ -19,7 +19,7 @@ class LostItemViewModel : ViewModel() {
     var message by mutableStateOf("")
 
     fun submitLostItem(studentNo: String): Boolean {
-        // Validasyonlar (Senin IssueViewModel mantığınla)
+        // Validasyonlar (
         if (itemName.isBlank() || location.isBlank()) {
             message = "Lütfen zorunlu alanları (İsim ve Konum) doldurunuz!"
             return false
@@ -35,7 +35,6 @@ class LostItemViewModel : ViewModel() {
         return true
     }
 
-    // Formu temizlemek istersen (isteğe bağlı)
     fun resetForm() {
         itemName = ""
         itemColor = ""
